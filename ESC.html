@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Advent+Pro:ital,wght@0,100..900;1,100..900&family=Frijole&family=Rock+3D&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style/projekt.css">
+    <title>Lisa Strebel</title>
+</head>
+<body>
+    <header>
+        <a class="logo" href="index.html">Lisa Strebel</a>
+        <button class="menu-toggle" aria-label="Menu öffnen">☰</button>
+        <nav class="menu" role="navigation">
+            <a href="index.html#uebermich">über mich</a>
+            <a href="index.html#projekte">Projekte</a>
+            <a href="index.html#kontakt">Kontakt</a>
+        </nav>
+    </header>
+    <main>
+        <section class="projekte" id="projekte">
+            <h3 class="projekte_titel">ESC side stories</h3>
+            <div class="projekt-beschreibung">
+                <h4 class="projekt-name">Livestream</h4>
+            </div>
+            <div class="video-container">
+                <iframe width="800" height="450" src="https://www.youtube.com/embed/H5u-NaV90ss?si=ILe_t7WlbrdpDoP5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+            <div class="content-columns">
+                <div class="left-column">
+                    <h5 class="column-title">Infos zum Projekt</h5>
+                    <p>Im Rahmen meines Majors Live Communication konzipierten und realisierten wir einen rund einstündigen Livestream mit den beiden Executive Producers des ESC 2025. Der Stream fand in der leeren St. Jakobshalle in Basel statt und richtete sich an Mitarbeitende der SRG, die am ESC mitgeholfen haben, sowie Mitglieder vom ESC-Fanclub.
+
+Inhaltlich stand ein gemeinsamer Rückblick auf vergangene ESC-Momente im Zentrum. Dabei suchten und erzählten wir Geschichten, die selbst den Executive Producers bislang unbekannt waren.
+
+Meine Verantwortung lag bei der gesamten technischen Umsetzung. Während des Livestreams bediente ich die Audioregie und stellte einen stabilen und reibungslosen Ablauf sicher. Das Projekt bot intensive Praxiserfahrung in der technischen Planung und Durchführung eines Live-Formats unter realen Bedingungen.</p>
+                </div>
+                <div class="right-column">
+                    <h5 class="column-title">Aufgaben</h5>
+                    <ul>
+                        <li>Technische Planung</li>
+                        <li>Technische Koordination</li>
+                        <li>Equipment</li>
+                        <li>Tonregie</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="bts">
+                <h5 class="bts-title">Behind the Scenes</h5>
+                <div class="video-container">
+                    <iframe width="800" height="450" src="https://www.youtube.com/embed/t6HVRKWaE0c?si=nZK5rzZP6y4dyRcv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                </div>                               
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p class="footertext">&copy; 2026 Lisa Strebel. Alle Rechte vorbehalten.</p>
+    </footer>
+    
+    <script>
+        // Mobile Menu Toggle Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const menu = document.querySelector('.menu');
+            
+            if (menuToggle && menu) {
+                menuToggle.addEventListener('click', function() {
+                    menu.classList.toggle('open');
+                    
+                    // Update aria-label for accessibility
+                    const isOpen = menu.classList.contains('open');
+                    menuToggle.setAttribute('aria-label', isOpen ? 'Menu schließen' : 'Menu öffnen');
+                    menuToggle.textContent = isOpen ? '✕' : '☰';
+                });
+                
+                // Close menu when clicking on a menu link
+                const menuLinks = menu.querySelectorAll('a');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        menu.classList.remove('open');
+                        menuToggle.setAttribute('aria-label', 'Menu öffnen');
+                        menuToggle.textContent = '☰';
+                    });
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (!menu.contains(event.target) && !menuToggle.contains(event.target)) {
+                        menu.classList.remove('open');
+                        menuToggle.setAttribute('aria-label', 'Menu öffnen');
+                        menuToggle.textContent = '☰';
+                    }
+                });
+            }
+        });
+        
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            if (index >= slides.length) currentSlideIndex = 0;
+            if (index < 0) currentSlideIndex = slides.length - 1;
+            
+            slides[currentSlideIndex].classList.add('active');
+            dots[currentSlideIndex].classList.add('active');
+        }
+
+        function changeSlide(direction) {
+            currentSlideIndex += direction;
+            showSlide(currentSlideIndex);
+        }
+
+        function currentSlide(index) {
+            currentSlideIndex = index - 1;
+            showSlide(currentSlideIndex);
+        }
+
+        // Auto-play slideshow (optional)
+        setInterval(() => {
+            currentSlideIndex++;
+            showSlide(currentSlideIndex);
+        }, 5000);
+    </script>
+</body>
+</html>
